@@ -1,0 +1,31 @@
+--- src/lib/HTTP/HTTPMessage.cpp.orig	2013-08-14 20:51:58.000000000 +0200
++++ src/lib/HTTP/HTTPMessage.cpp	2013-08-14 20:53:32.000000000 +0200
+@@ -44,6 +44,7 @@
+   m_nHTTPVersion			  = HTTP_VERSION_UNKNOWN;
+   m_nHTTPMessageType    = HTTP_MESSAGE_TYPE_UNKNOWN;
+ 	m_sHTTPContentType    = "";
++	m_sHTTPContentType    = "text/plain";
+   m_nBinContentLength   = 0; 
+   m_nBinContentPosition = 0;
+   m_nBufferSize         = 0;
+@@ -159,9 +160,8 @@
+   /* Version */
+ 	switch(m_nHTTPVersion)
+ 	{
+-		case HTTP_VERSION_1_0: sVersion = "HTTP/1.0"; break;
+ 		case HTTP_VERSION_1_1: sVersion = "HTTP/1.1"; break;
+-    default:               ASSERT(0);             break;
++    default:               sVersion = "HTTP/1.0"; break;
+   }
+ 	
+   /* Message Type */
+@@ -173,6 +173,9 @@
+ 		case HTTP_MESSAGE_TYPE_200_OK:
+       sResult << sVersion << " 200 OK\r\n";
+       break;
++    case HTTP_MESSAGE_TYPE_UNKNOWN:
++      sResult << sVersion << " 501 Not implemented\r\n";
++      break;
+     case HTTP_MESSAGE_TYPE_206_PARTIAL_CONTENT:
+       sResult << sVersion << " 206 Partial Content\r\n";
+       break;
