@@ -34,6 +34,7 @@ CONFIGURE_ARGS+=	--enable-largefile \
 			--enable-musepack \
 			--enable-flac \
 			--enable-dlna \
+			--disable-inotify \
 			--disable-exiv2
 CONFIGURE_ARGS+=	--localstatedir=/filer/system/data
 
